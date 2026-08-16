@@ -39,7 +39,7 @@ values are imputed **within site** — median for continuous, mode for categoric
 ## How to run
 
 ```bash
-git clone https://github.com/[user]/heart-transportability.git
+git clone https://github.com/Da-Yneb/heart-transportability.git
 cd heart-transportability
 pip install -r requirements.txt
 jupyter notebook transportability.ipynb     # then Run All
