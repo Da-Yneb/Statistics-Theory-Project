@@ -2,8 +2,6 @@
 
 Statistical Theory — course project, Part 2.
 
-**Authors:** [ names ], [ I.D. numbers ]
-
 ## Research question
 
 The UCI heart-disease database pools four hospitals (Cleveland, Hungary, Switzerland,
