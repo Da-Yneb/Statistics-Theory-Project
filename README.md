@@ -1,6 +1,6 @@
 # Does a Heart-Disease Diagnostic Model Travel Across Hospitals?
 
-Statistical Theory — course project, Part 2.
+Statistical Theory - course project, Part 2.
 
 ## Research question
 
@@ -8,20 +8,20 @@ The UCI heart-disease database pools four hospitals (Cleveland, Hungary, Switzer
 VA Long Beach) that differ in equipment, referral criteria and recording conventions, yet it is
 almost always analysed as one sample. We ask a single question about generalisation:
 
-> If we train a diagnostic model at one hospital, does it still work at the others — and if not, why?
+> If we train a diagnostic model at one hospital, does it still work at the others - and if not, why?
 
 Every quirk of this dataset (unmeasured cholesterol, the asymptomatic-chest-pain paradox, the
 prevalence gap) is treated as a *reason a model fails to transport* rather than a separate curiosity.
 
 ## Data
 
-`data/heart_disease_uci.csv` — 920 patients, 4 hospital labels
+`data/heart_disease_uci.csv` - 920 patients, 4 hospital labels
 (Kaggle: [`redwankarimsony/heart-disease-data`](https://www.kaggle.com/datasets/redwankarimsony/heart-disease-data),
 originally UCI Heart Disease). The file is included in this repository; if it is missing, the
 notebook downloads it automatically via `kagglehub` and saves it to `data/`.
 
 Cholesterol is excluded from all models (structurally absent at some sites); remaining missing
-values are imputed **within site** — median for continuous, mode for categorical variables.
+values are imputed **within site** - median for continuous, mode for categorical variables.
 
 ## Repository
 
@@ -52,19 +52,19 @@ report.
 
 ## What the notebook does
 
-1. **Transportability matrix** — train at each site, test at every site; diagonal = 5-fold
+1. **Transportability matrix** - train at each site, test at every site; diagonal = 5-fold
    cross-validated within-site AUC, off-diagonal = transferred AUC.
-2. **Prevalence decomposition** — pooled risk model → expected prevalence from case-mix vs observed;
+2. **Prevalence decomposition** - pooled risk model → expected prevalence from case-mix vs observed;
    the difference is the residual site effect (direct standardisation).
-3. **Nested GLRTs** — M0 (features) vs M1 (+site) vs M2 (+site×feature), with Wald confidence
+3. **Nested GLRTs** - M0 (features) vs M1 (+site) vs M2 (+site×feature), with Wald confidence
    intervals; plus per-feature heterogeneity tests with Bonferroni correction.
 4. **Breslow–Day / Cochran–Mantel–Haenszel** homogeneity of single predictors across sites.
 5. **Bootstrap and DeLong** confidence intervals on transferred AUCs; power via the non-central χ².
-6. **Calibration** — recalibration slope/intercept, Brier score, Hosmer–Lemeshow, reliability
+6. **Calibration** - recalibration slope/intercept, Brier score, Hosmer–Lemeshow, reliability
    diagrams: transported probabilities are wrong even where the ranking partly survives.
-7. **Simulation study** — validates the Type-I error rate and power of the heterogeneity test at our
+7. **Simulation study** - validates the Type-I error rate and power of the heterogeneity test at our
    sample sizes.
-8. **Appendix** — two-part (hurdle) Gamma MLE for `oldpeak` by Nelder–Mead with a
+8. **Appendix** - two-part (hurdle) Gamma MLE for `oldpeak` by Nelder–Mead with a
    Kolmogorov–Smirnov fit test, and Bonferroni correction over the primary family of tests.
 
 All estimation is implemented from scratch (logistic MLE by Newton–Raphson); no `statsmodels` or
